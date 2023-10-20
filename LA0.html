@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learning Artifact 1</title>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+        crossorigin="anonymous"></script>
+        <style>
+                h1, h5 { text-align: center; }
+
+                p {
+                        text-align: center;
+                        font-size: 1.2rem;
+                }
+
+                .scene {
+                        position: relative;
+                        width: 60%;
+                        height: 50vh;
+                        margin-top: 3rem;
+                        left: 50%;
+                        transform: translateX(-50%);
+                }
+
+                .objects {
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        height: inherit;
+                }
+
+                .thermometer {
+                        width: 5rem;
+                        position: absolute;
+                        top: 0;
+                        left: 5rem;
+                }
+
+                .girl {
+                        width: 12rem;
+                        position: absolute;
+                        bottom: 0;
+                        left: 50%;
+                        transform: translateX(-50%);
+                }
+
+                .star {
+                        width: 10rem;
+                        position: absolute;
+                        right: 0;
+                }
+
+                .star:hover {
+                        cursor: grab;
+
+                }
+
+
+                .blue { bottom: 0; }
+
+                .netural { width: 9.5rem; }
+
+                .explain { margin-top: 3rem; }
+
+                .temp-img, .thermometer {
+                        display: none;
+                }
+
+                .blue-word {color: #3939f7;}
+                .red-word {color: red;}
+        </style>
+</head>
+<body>
+        <h1><span class="blue-word">Thermal</span> <span class="red-word">Radiation</span> - <em>Visual Representation</em></h1>
+        <p><strong>Directions: </strong> <em>Drag one of the stars</em> on the right towards ⬅ and away ➡ from the girl and watch thermal radiation 🌡️ in action!</p>
+        <div class="scene">
+                <div class="objects">
+                        <img class="thermometer temp-hot" src="images/hotTemp.PNG" alt="">
+                        <img class="thermometer temp-cold" src="images/coldTemp.PNG" alt="">
+                        <img class="girl temp-img hot" src="images/hot.PNG" alt="">
+                        <img class="girl temp-img cold" src="images/cold.PNG" alt="">
+                        <img class="girl netural" src="images/netural.PNG" alt="">
+                        <img class="star red" src="images/redStar.PNG" alt="">
+                        <img class="star blue" src="images/blueStar.PNG" alt="">
+
+                </div>
+        </div>
+        <p class="explain"><strong>Explanation: </strong> According to thermal radiation, hotter 🔥 objects are brighter
+                and <span style="color:#3939f7">bluer</span>, <br> while cooler ❄️ objects are 
+                dimmer and <span style="color: red">redder</span>.</p>
+        <h5>Hameedah Lawal - Spring 2023</h5>
+        <script>
+                $(".star").draggable({
+                   start: function(event, ui) {
+                                $(".girl").css("display", "none");
+                                $(".thermometer").css("display", "none");
+
+                                if ($(this).hasClass("red")) {
+                                        $(".cold").css("display", "inline");
+                                        $(".temp-cold").css("display", "inline");
+                                } else {
+                                        $(".hot").css("display", "inline");
+                                        $(".temp-hot").css("display", "inline");
+                                }
+                        }     
+                });
+        </script>
+</body>
+</html>

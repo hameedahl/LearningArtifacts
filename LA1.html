@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learning Artifact 2</title>
+        <script src="https://kit.fontawesome.com/55d0223fcd.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+        crossorigin="anonymous"></script>
+        <style>
+                body {
+                        background-image: url(images/space.jpg);
+                        background-size: cover;
+                        color: #fff;
+                        font-family: 'Times New Roman', Times, serif;
+                }
+
+                h1 { text-align: center; font-size: 50px; }
+                p { text-align: center;}
+                .caption { 
+                        text-align: center; 
+                        width: 40rem;
+                        height: 5rem;
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                }
+
+                i { font-size: 60px; position: relative; top: 12rem; cursor: pointer; }
+                i:hover { text-shadow: 5px 5px 5px #3d46fa; }
+
+                .slide-show {
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 50rem;
+                        height: 30rem;
+                        display: flex;
+                }
+
+                .slide-content-container {
+                        width: inherit;
+                        position: relative;
+                }
+
+                img {
+                        position: absolute;
+                        width: 55%;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                }
+        </style>
+</head>
+<body>
+        <h1>Death of the Sun</h1>
+        <p class="start">Click the right arrow to continue</p>
+        <div class="slide-show">
+                <i class="fa-solid fa-square-caret-left left"></i>
+                <div class="slide-content-container">
+                                <img class="slide-img" src="" alt="">
+                </div>
+                <i class="fa-solid fa-square-caret-right right"></i>
+        </div>
+        <p class="caption"></p>
+
+        <script>
+                slideImgs = ["sun.png", "red-giant.png", "earth.png", "plantery-nebula.png", "white-dwarf.png", "supernova.png", "black-hole.png"];
+                slideCaptions = ["Like most stars in the Main Sequence, <span style='color: orange'>the Sun</span> will eventually run out of gas.", 
+                                 "When it does, it becomes cooler and expands into a <span style='color: red'>Red Giant</span>, and, during this phase, begins making most elements from hydrogen to iron...", 
+                                 "And it will get as big as the Earth's orbit, ending Earth in the process...", 
+                                 "After the Earth is gone, the Red Giant will become a <span style='color: blue'>Planetary Nebula</span>...", 
+                                 "Finally, it becomes a <strong>White Dwarf</strong> and, depending on its mass..", 
+                                 "If the White Dwarf is 8x more massive than the Sun, it will explode as a <span style='color: purple'>Supernova</span>, making the rest of the elements...",
+                                 "Or if it's 25x more massive, it becomes a <span style='color: grey'>Black Hole</span>. THE END"]
+                slide = 0;
+                slideSize = slideImgs.length;
+
+                $(".slide-img").attr("src", "images/" + slideImgs[0]);
+                $(".caption").html(slideCaptions[0]);
+
+                $(".right").click(async function () {
+                        $(".start").hide()
+                        slideShow("F");
+                })
+
+                $(".left").click(function () {
+                        $(".start").hide()
+                        slideShow("B");
+                })
+
+                function slideShow(direction) {
+                        if (direction == "F") {
+                                slide++;
+                        } else {
+                                slide == 0? slide = slideSize - 1: slide--;
+                        }
+                        slide = slide % slideSize;
+                        $(".slide-img").attr("src", "images/" + slideImgs[slide]);
+                        $(".caption").html(slideCaptions[slide]);
+                }
+        </script>
+</body>
+</html>

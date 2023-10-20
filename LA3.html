@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learning Artifact 4</title>
+        <script src="https://kit.fontawesome.com/55d0223fcd.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+        crossorigin="anonymous"></script>
+        <style>
+                body {
+                        background-image: url(images/space.jpg);
+                        background-size: cover;
+                        color: #fff;
+                        font-family: 'Times New Roman', Times, serif;
+                }
+
+                h1 { text-align: center; font-size: 50px; }
+                p { text-align: center;}
+                .caption { 
+                        text-align: center; 
+                        width: 40rem;
+                        height: 5rem;
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        font-size: 20px;
+
+                }
+
+                i { font-size: 60px; position: relative; top: 12rem; cursor: pointer; width: 0; padding: 2rem;}
+                i:hover { text-shadow: 5px 5px 5px red; }
+                .right {text-align: left;}
+
+                .slide-show {
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 50rem;
+                        height: 30rem;
+                        display: flex;              
+                }
+
+                .slide-content-container {
+                        width: inherit;
+                        position: relative;
+                }
+
+                .slide-img {
+                        position: absolute;
+                        width: 100%;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 0;
+                }
+
+                .arrow {
+                        position: absolute;
+                        transform: rotate(90deg);
+                        top: 25rem;
+                        z-index: 1;
+                }
+
+                .arrow-pos {left: 14rem;}
+
+                .arrow img {
+                        width: 90px;
+                }
+        </style>
+</head>
+<body>
+        <h1>The Layers of the Earth</h1>
+        <p class="start">Click the right arrow to continue</p>
+        <div class="slide-show">
+                <i class="fa-solid fa-square-caret-left left"></i>
+                <div class="slide-content-container">
+                                <div class="arrow arrow-pos">
+                                        <img class="planet" src="images/arrow.png" alt="">
+                                </div>
+                                <img class="slide-img" src="images/earth_layers.png" alt="">
+                </div>
+                <i class="fa-solid fa-square-caret-right right"></i>
+        </div>
+        <p class="caption"></p>
+        <script>
+                slideCaptions = ["<span style='color:red';>The Crust:</span> consists of the continents and the oceans, where the oceans are thinner, and the continents are thicker.", 
+                                 "<span style='color:red';>The Mantle:</span> malleable rock and this is also where convection currents, which make the plates move, are located.", 
+                                 "<span style='color:red';>The Outer Core:</span> the liquid core",
+                                 "<span style='color:red';>The Inner Core:</span> The solid core, high in temperature, and is filled with charge"];
+
+                arrowPositions = [[14,25], [18,24], [20,21], [21,19]];
+                slide = 0; pos = 0;
+                slideSize = slideCaptions.length;
+
+                $(".caption").html(slideCaptions[0]);
+
+                $(".right").click(async function () {
+                        $(".start").hide()
+                        slideShow("F");
+                })
+
+                $(".left").click(function () {
+                        $(".start").hide()
+                        slideShow("B");
+                })
+
+                function slideShow(direction) {
+                        if (direction == "F") {
+                                slide++;
+                        } else {
+                                slide == 0? slide = slideSize - 1: slide--;
+                        }
+                        slide = slide % slideSize;
+
+                        $(".caption").html(slideCaptions[slide]);
+                        $(".arrow-pos").css("left", arrowPositions[slide][0] + "rem");
+                        $(".arrow-pos").css("top", arrowPositions[slide][1] + "rem");
+
+                }
+        </script>
+</body>
+</html>

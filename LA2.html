@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learning Artifact 3</title>
+        <script src="https://kit.fontawesome.com/55d0223fcd.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+        crossorigin="anonymous"></script>
+        <style>
+                body {
+                        background-image: url(images/space.jpg);
+                        background-size: cover;
+                        color: #fff;
+                        font-family: 'Times New Roman', Times, serif;
+                }
+
+                h1 { text-align: center; font-size: 50px; }
+                p { text-align: center;}
+                .caption { 
+                        text-align: center; 
+                        width: 40rem;
+                        height: 5rem;
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                }
+
+                i { font-size: 60px; position: relative; top: 12rem; cursor: pointer; }
+                i:hover { text-shadow: 5px 5px 5px red; }
+
+                .slide-show {
+                        position: relative;
+                        left: 50%;
+                        transform: translateX(-50%);
+                        width: 50rem;
+                        height: 30rem;
+                        display: flex;
+                }
+
+                .slide-content-container {
+                        width: inherit;
+                        position: relative;
+                }
+
+                .slide-img {
+                        position: absolute;
+                        width: 55%;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        z-index: 0;
+                }
+
+                .wobble {
+                        animation: tilt-shaking 0.15s infinite;
+                }
+
+                @keyframes tilt-shaking {
+                        0% { transform: translate(-50%, -50%) rotate(0deg); }
+                        25% { transform: translate(-50%, -50%) rotate(5deg); }
+                        50% { transform: translate(-50%, -50%) rotate(0eg); }
+                        75% { transform: translate(-50%, -50%) rotate(-5deg); }
+                        100% { transform: translate(-50%, -50%) rotate(0deg); }
+                }
+
+                .spin {
+                        -webkit-animation: spin 2s linear infinite;
+                        animation: spin 2s linear infinite;
+                }
+
+                .planet {
+                        position: absolute;
+                        bottom: 70px;
+                        right: 70px;
+                        width: 10%;
+                }
+
+                .dark-planet {
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        width: 10%;
+                        z-index: 1;
+                }
+
+                .orbit {
+                        position: absolute;
+                        border-radius: 100%;
+                        padding: 30px;
+                        height: 95%;
+                        width: 70%;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                }
+
+                @-webkit-keyframes spin {
+                        0% { -webkit-transform: rotate(0deg); }
+                        100% { -webkit-transform: rotate(360deg); }
+                }
+
+                @keyframes spin {
+                        0% { transform: translate(-50%, -50%) rotate(0deg); }
+                        100% { transform: translate(-50%, -50%) rotate(360deg); }
+                }
+        </style>
+</head>
+<body>
+        <h1>Discovering Exoplanets</h1>
+        <p class="start">Click the right arrow to continue</p>
+        <div class="slide-show">
+                <i class="fa-solid fa-square-caret-left left"></i>
+                <div class="slide-content-container">
+                                <img class="dark-planet" src="images/dark_planet.png" alt="">
+                                <div class="orbit spin">
+                                        <img class="planet" src="images/jupiter.png" alt="">
+                                </div>
+                                <img class="slide-img" src="images/sun.png" alt="">
+                </div>
+                <i class="fa-solid fa-square-caret-right right"></i>
+        </div>
+        <p class="caption"></p>
+        <script>
+                $(".orbit").hide();
+                $(".dark-planet").hide();
+                slideCaptions = ["The first method to find an exoplanet is <span style='color: red'>Radial Velocity (Wobble Method)</span>. This method allows us to determine if a planet is near a star.", 
+                                 "As the planet nears the star during orbit, the star begins to wobble, and with the help of the Doppler shift, astronomers can then measure it. A star's wobble is how we determine the planet's mass because the <span style='color: red'>more massive</span> planets cause the <span style='color: red'>greatest</span> wobble.", 
+                                 "The second method is the <span style='color: red'>Transit Method</span>, which involves the change in brightness of the star as a planet passes in front of it. The difference in brightness determines the planet's size because the <span style='color: red'>larger (in size) planets block more light</span>.",
+                                 "Thus, we get the <span style='color: red'>density</span> from the <span style='color: red'>mass</span> and the <span style='color: red'>size</span>, and from there, we can get what a planet is <span style='color: red'>made of</span> with the help of rock dating. THE END"] 
+                slide = 0;
+                slideSize = slideCaptions.length;
+
+                $(".caption").html(slideCaptions[0]);
+
+                $(".right").click(async function () {
+                        $(".start").hide()
+                        slideShow("F");
+                })
+
+                $(".left").click(function () {
+                        $(".start").hide()
+                        slideShow("B");
+                })
+
+                function slideShow(direction) {
+                        if (direction == "F") {
+                                slide++;
+                        } else {
+                                slide == 0? slide = slideSize - 1: slide--;
+                        }
+                        slide = slide % slideSize;
+                        $(".caption").html(slideCaptions[slide]);
+                        spinPlanet();
+                        darkPlanet();
+
+                }
+
+                function spinPlanet() {
+                        if (slide == 1) {
+                                $(".slide-img").addClass("wobble");
+                                $(".orbit").addClass("spin");
+                                $(".orbit").show();
+                        } else {
+                                $(".slide-img").removeClass("wobble");
+                                $(".orbit").removeClass("spin");
+                                $(".orbit").hide();
+                        }
+                }
+
+                function darkPlanet() {
+                        if (slide == 2) {
+                                $(".dark-planet").show();
+                        } else {
+                                $(".dark-planet").hide();
+                        }
+                }
+        </script>
+</body>
+</html>

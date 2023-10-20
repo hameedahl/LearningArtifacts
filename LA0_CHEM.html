@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Learning Artifact 1-Chemistry</title>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script
+        src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"
+        integrity="sha256-lSjKY0/srUM9BE3dPm+c4fBo1dky2v27Gdjm2uoZaL0="
+        crossorigin="anonymous"></script>
+        <style>
+                        
+                * {outline: none;}
+                body {
+                        background-color: #171717;
+                        display: flex;
+                        justify-content: center;
+                        color: #000;
+                        overflow: hidden;
+                }
+
+                .container {
+                        position: absolute;
+                        width: 80rem;
+                        height: 50rem;
+                        background-color: #ececec;
+                        display: flex;
+                        justify-content: center;
+                        top: 2rem;
+                        box-shadow: 1px -3px 4px #737373;
+                        overflow-y: auto;
+
+                }
+
+                .border {
+                        width: inherit;
+                        height: 95px;
+                        background-color: #fff;
+                        position: fixed;
+                        display: block;
+                        border-bottom: 1px solid #dadada;
+                        z-index: 2;
+                }
+
+                .border::after {
+                        content: '';
+                        position: absolute;
+                        width: inherit;
+                        border-top: 1px solid #dadada;
+                        height: 30px;
+                        bottom: 0;
+                }
+
+                .border-right {
+                        position: absolute;
+                        right: 0;
+                        width: 3rem;
+                        height: inherit;
+                        background-color: #fff;
+                        border-left: 1px solid #dadada;
+                        z-index: 1;
+                }
+
+                .doc {
+                        width: 40rem;
+                        height: 40rem;
+                        background-color: #fff;
+                        position: relative;
+                        top: 110px;
+                        display: block;
+                        box-shadow: 1px -1px 10px #a8a8a8;
+                        text-align: left;
+                        padding: 50px;
+                        z-index: 0;
+                }
+
+                .doc-title {
+                        padding-left: 50px;
+                        font-family: Arial, Helvetica, sans-serif;
+                        font-weight: normal;
+                        font-size: 1rem;
+                }
+
+                h1 { font-size: 30px; text-align: center; text-decoration: underline; }
+                h3 { text-align: center;}
+
+                .convert, .translate { 
+                        cursor: pointer; 
+                        border: 2px solid red; 
+                        padding: 4px;
+                        border-radius: 5rem;
+                }
+
+        </style>
+</head>
+<body>
+          <!-- <h2>Genome => Proteins</h2>  -->
+        <div class="container">
+                <div class="border"></div>
+                <div class="doc">        
+                        <h1>The Two Steps to Central Dogma</h1>
+                        <h3>Genome => Proteins</h3>
+                        <p style="color: blue;">Step 1 Transcription: DNA (unwounded) is transcribed into useful RNA</p>
+                        <ul>
+                                <li>mRNA = one gene</li>
+                                <li>mRNA (messenger RNA) ~ single stranded & able to leave the nucleus</li>
+                                <li>A&rarr;U, T&rarr;A, G&rarr;C, C&rarr;G</li>
+                        </ul>
+                        <p>Analogy ~ <em class="convert">Converting</em> a PDF into a Word Doc <strong>(click on the red circle to make the doc editable)</strong></p>
+                        <p style="color: green;">Step 2 Translation: going from a nucleic acid to a protein</p>
+                        <ul class="trans-text">
+                                <li>Requirements: Ribosomal RNA + tRNA</li>
+                                <li>Ribosomal RNA: stabilization and bonding site</li>
+                                <li>tRNA (transfer RNA): brings the amino acid that corresponds to the RNA sequence</li>
+                                <li>the RNA copy is translated into a functional protein</li>
+                                <li>Ribosome reads the codons on the mRNA and finds matching tRNA</li>
+                                <li>matching tRNA = matching amino acids</li>
+                                <li>A&rarr;U, U&rarr;A, G&rarr;C, C&rarr;G</li>
+                        </ul> 
+                        <p class="trans-text2">Analogy ~ <em class="translate">Translating</em> this Word Doc into another language <strong>(click on the red circle to translate)</strong></p>
+                </div>
+                <div class="border-right"></div>
+        </div>
+        <script>
+                $(".translate").click(function () {
+                        $(".trans-text").replaceWith(`
+                                <ul class="trans-text">
+                                        <li>Requisitos: ARNt & ARN Ribosómico</li>
+                                        <li>ARN Ribosómico: sitio de estabilización y unión</li>
+                                        <li>ARNt (ARN de transferencia): aporta el aminoácido que corresponde a la secuencia de ARN</li>
+                                        <li>la copia de ARN se traduce en una proteína funcional</li>
+                                        <li>El ribosoma lee los codones en el ARNm y encuentra el ARNt coincidente</li>
+                                        <li>ARNt coincidente = aminoácidos coincidentes</li>
+                                        <li>A&rarr;U, U&rarr;A, G&rarr;C, C&rarr;G</li>
+                                </ul>
+                `)
+                $(".trans-text2").replaceWith(`
+                        <p class="trans-text2">Analogía ~ <em class="translate">Traducir</em> este documento de Word a otro idioma</p>
+                `)
+                        
+                });
+                $(".convert").click(function () {
+                        $(" div").attr("contentEditable", "true");
+                })
+        </script>
+</body>
+</html>
