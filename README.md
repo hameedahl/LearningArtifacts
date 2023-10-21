@@ -11,7 +11,7 @@ A collection of interactive and educational web pages, referred to as "learning 
 - [Getting Started](#getting-started)
 - [How to Explore](#how-to-explore)
 
-- ## Navigation
+## Navigation
 
 [LA - Week 1](https://hameedahl.github.io/LearningArtifacts/LA0.html) | [LA - Week 2](https://hameedahl.github.io/LearningArtifacts/LA1.html) | [LA - Week 3](https://hameedahl.github.io/LearningArtifacts/LA2.html) | [LA - Week 4](https://hameedahl.github.io/LearningArtifacts/LA3.html) | [LA - Week 5](https://hameedahl.github.io/LearningArtifacts/LA0_CHEM.html)
 
